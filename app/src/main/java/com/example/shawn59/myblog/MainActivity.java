@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
 
+import com.example.shawn59.myblog.model.AuthUser;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         String password = editPassword.getText().toString();
         if (login != "" && password != "") {
 
+            AuthUser request = new AuthUser();
+           request.start(login, password);
         }
     }
+
 }
