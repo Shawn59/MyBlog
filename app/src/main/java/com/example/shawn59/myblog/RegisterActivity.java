@@ -8,39 +8,37 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
 
-import com.example.shawn59.myblog.model.AuthUser;
+import com.example.shawn59.myblog.model.RegisterUser;
 
+public class RegisterActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
+    EditText editFIO;
     EditText editLogin;
     EditText editPassword;
-    EditText editFIO;
-
-    Button buttonLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // элементы
+        setContentView(R.layout.activity_register2);
         editLogin = (EditText) findViewById(R.id.idEditLogin);
         editPassword = (EditText) findViewById(R.id.idEditPassword);
-        /*buttonLogin = (Button) findViewById(R.id.idButtonLogin);*/
-    }
-    //обработчик
-    public void onLoginClick(View v) {
-        String login = editLogin.getText().toString();
-        String password = editPassword.getText().toString();
-        if (login != "" && password != "") {
-            AuthUser request = new AuthUser();
-            request.start(login, password);
-        }
+        editFIO = (EditText) findViewById(R.id.idEditFIO);
     }
 
-    public void onRegPageClick(View v) {
-        //перек
-        Intent intent = new Intent(this, BlogActivity.class);
+    public void onAuthPage(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void onRegister(View v) {
+        String login = editLogin.getText().toString();
+        String password = editPassword.getText().toString();
+        String fio = editFIO.getText().toString();
+        if (login != "" && password != "") {
+            RegisterUser request = new RegisterUser();
+            request.start(fio, login, password);
+        } else {
+
+        }
     }
 }
