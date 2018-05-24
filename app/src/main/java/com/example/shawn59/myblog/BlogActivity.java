@@ -1,5 +1,6 @@
 package com.example.shawn59.myblog;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -98,6 +99,9 @@ public class BlogActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             int id = view.getId();
+                            Intent intent = new Intent(getApplicationContext(), viewBlogActivity.class);
+                            intent.putExtra("id", id);
+                            startActivity(intent);
                         }
                     });
                     // Добавление элемента
@@ -115,9 +119,5 @@ public class BlogActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
         }
-    }
-
-    public void onPageBlogClick(View v) {
-
     }
 }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onRegPageClick(View v) {
         //перек
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, viewBlogActivity.class);
         startActivity(intent);
     }
 
