@@ -57,26 +57,22 @@ public class Sqlite extends SQLiteOpenHelper {
      * Создаёт новый контакт. Если создан успешно - возвращается
      * номер строки rowId, иначе -1
      */
-    public long insert (String title, String text, int blog_id) {
+    public void insert (String title, String text, int blog_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues initialValues = createContentValues(title, text, blog_id);
-        long row = db.insert(DATABASE_TABLE, null, initialValues);
+        long d = db.insert(DATABASE_TABLE, null, initialValues);
         db.close();
-        return row;
     }
 
 
     /**
      * Изменение строчки
      */
-    public boolean update (long rowId, String title, String text,
-                               int blog_id) {
+    public void update (long rowId, String title, String text, int blog_id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues updateValues = createContentValues(title, text,
-                blog_id);
-
-        return db.update(DATABASE_TABLE, updateValues, COLUMN_ID + "=" + rowId,
-                null) > 0;
+        ContentValues updateValues = createContentValues(title, text, blog_id);
+        db.update(DATABASE_TABLE, updateValues, COLUMN_ID + "=" + rowId,null);
+        db.close();
     }
 
     /**
@@ -101,11 +97,11 @@ public class Sqlite extends SQLiteOpenHelper {
     /**
      * Получаем конкретный контакт
      */
-    public Cursor getTable(long rowId) throws SQLException {
+    public Cursor getOneRecord(int id) throws SQLException {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.query(true, DATABASE_TABLE,
                 new String[] { COLUMN_ID, COLUMN_Title, COLUMN_Text,
-                        COLUMN_Blog_Id }, COLUMN_ID + "=" + rowId, null,
+                        COLUMN_Blog_Id }, COLUMN_ID + "=" + id, null,
                 null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
